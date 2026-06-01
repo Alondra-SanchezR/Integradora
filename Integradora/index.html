@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MateMas - Tutor IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient-layer">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="symbol">+</div>
+    <div class="symbol">−</div>
+    <div class="symbol">×</div>
+    <div class="symbol">÷</div>
+    <div class="symbol">%</div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+  </div>
+
+  <section id="screen-login" class="screen login active">
+    <div class="glass-card">
+      <div class="logo-block">
+        <img data-src="logo" alt="Logo MateMas" />
+        <div>
+          <h1 class="hero-title">MateMas</h1>
+          <p class="hero-subtitle">Tu tutor de matematicas</p>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img data-src="s1" alt="Profe Cosmo" />
+      </div>
+      <div class="chat-bubble">Hola! Estas listo para aprender?</div>
+      <div class="input-group">
+        <input id="usernameInput" type="text" placeholder="Tu nombre" autocomplete="off" />
+        <input id="passwordInput" type="password" placeholder="Contraseña" />
+      </div>
+      <div style="margin-top:1.5rem; display:flex; justify-content:center;">
+        <button id="loginButton" class="btn-primary">Entrar a estudiar!</button>
+      </div>
+      <p class="hero-footer">Primera vez? <a href="#">Registrate gratis</a></p>
+    </div>
+  </section>
+
+  <section id="screen-menu" class="screen menu">
+    <div class="topbar">
+      <div class="brand">
+        <img data-src="logo" alt="Logo MateMas" />
+        <h1>MateMas</h1>
+      </div>
+      <div id="profilePill" class="profile-pill">Bienvenido</div>
+    </div>
+
+    <div class="welcome-banner">
+      <img data-src="s2" alt="Mascota" />
+      <div class="welcome-text">
+        <h2>Hola, <span id="welcomeName">estudiante</span>!</h2>
+        <p>Profe Cosmo ya preparo juegos, retos y explicaciones para que domines las matematicas como un verdadero campeon.</p>
+        <p class="xp-bar-label">Nivel 3 - 450/1000 XP</p>
+        <div class="xp-bar"><div class="xp-fill"></div></div>
+      </div>
+    </div>
+
+    <div class="topic-grid">
+      <div class="topic-card" onclick="goToChat('sumas')">
+        <h3>Sumas</h3>
+        <p>Aprende a sumar con ritmo y practica ejercicios divertidos.</p>
+      </div>
+      <div class="topic-card" onclick="goToChat('restas')">
+        <h3>Restas</h3>
+        <p>Resta rapido y claro con ejemplos faciles de seguir.</p>
+      </div>
+      <div class="topic-card" onclick="goToChat('multiplicacion')">
+        <h3>Multiplicacion</h3>
+        <p>Multiplica como un mago con tablas y trucos sencillos.</p>
+        <span class="badge popular">Popular</span>
+      </div>
+      <div class="topic-card" onclick="goToChat('division')">
+        <h3>Division</h3>
+        <p>Divide paso a paso y comprende cada resultado.</p>
+      </div>
+      <div class="topic-card" onclick="goToChat('fracciones')">
+        <h3>Fracciones</h3>
+        <p>Descubre como funcionan las partes de un todo con claridad.</p>
+        <span class="badge nuevo">Nuevo</span>
+      </div>
+      <div class="topic-card" onclick="goToLogros()">
+        <h3>Mis Logros</h3>
+        <p>Revisa tus ejercicios completados y las insignias que ya ganaste.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-chat" class="screen chat-screen">
+    <div class="chat-header">
+      <button class="btn-secondary" onclick="showScreen('menu')">Volver</button>
+      <div class="chat-avatar">
+        <div class="avatar"><img data-src="s1" alt="Avatar Profe Cosmo" /></div>
+        <div>
+          <h2>Profe Cosmo</h2>
+          <div class="status"><span></span>En linea</div>
+        </div>
+      </div>
+      <div></div>
+    </div>
+    <div id="messageArea" class="messages"></div>
+    <div class="quick-actions">
+      <button onclick="sendQuick('Explicame de nuevo')">Explicame de nuevo</button>
+      <button onclick="sendQuick('Otro ejercicio')">Otro ejercicio</button>
+      <button onclick="sendQuick('Dame una pista')">Dame una pista</button>
+      <button onclick="sendQuick('Lo entendi!')">Lo entendi!</button>
+    </div>
+    <div class="chat-input-panel">
+      <input id="chatInput" type="text" placeholder="Escribe tu pregunta o respuesta..." autocomplete="off" />
+      <button class="btn-primary" onclick="submitChat()">Enviar</button>
+    </div>
+  </section>
+
+  <section id="screen-logros" class="screen logros">
+    <div class="logros-header">
+      <button class="btn-secondary" onclick="showScreen('menu')">Volver</button>
+      <h2>Mis Logros</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3>Ejercicios</h3>
+        <p class="value">47</p>
+      </div>
+      <div class="stat-card">
+        <h3>Correctas</h3>
+        <p class="value">38</p>
+      </div>
+      <div class="stat-card">
+        <h3>Precision</h3>
+        <p class="value">81%</p>
+      </div>
+    </div>
+    <div>
+      <h3 class="section-title">Insignias</h3>
+      <div class="badge-grid">
+        <div class="badge-card unlocked"><div class="badge-icon">★</div><strong>Super Sumas</strong><p>Completaste 10 ejercicios de sumas.</p></div>
+        <div class="badge-card unlocked"><div class="badge-icon">★</div><strong>Resta Rapida</strong><p>Lograste 8 respuestas correctas seguidas.</p></div>
+        <div class="badge-card unlocked"><div class="badge-icon">★</div><strong>Multiplica</strong><p>Dominas las tablas de multiplicar.</p></div>
+        <div class="badge-card locked"><div class="badge-icon">?</div><strong>Heroe de la Division</strong><p>Desbloquea al completar 5 divisiones.</p></div>
+        <div class="badge-card locked"><div class="badge-icon">?</div><strong>Maestro de Fracciones</strong><p>Desbloquea al avanzar con fracciones.</p></div>
+        <div class="badge-card locked"><div class="badge-icon">?</div><strong>Velocidad</strong><p>Desbloquea al responder rapido 3 ejercicios.</p></div>
+        <div class="badge-card locked"><div class="badge-icon">?</div><strong>Curioso</strong><p>Desbloquea al pedir 5 pistas diferentes.</p></div>
+        <div class="badge-card locked"><div class="badge-icon">?</div><strong>Constante</strong><p>Desbloquea con 7 dias de practica seguidos.</p></div>
+      </div>
+    </div>
+    <div style="width:min(100%,800px);">
+      <h3 class="section-title">Actividad reciente</h3>
+      <div class="activity-list">
+        <div class="activity-card"><h3>Sumas completadas</h3><p>Respondiste 12 preguntas y conseguiste 10 correctas. ¡Excelente comienzo!</p></div>
+        <div class="activity-card"><h3>Retos de Multiplicacion</h3><p>Practicando tablas, lograste un 90% en tus ejercicios recientes.</p></div>
+        <div class="activity-card"><h3>Fracciones</h3><p>Exploraste conceptos nuevos sobre mitades y tercios. Sigue asi.</p></div>
+        <div class="activity-card"><h3>Conversacion con Profe</h3><p>Pediste una pista y aprendiste una forma facil de dividir pasos.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Variables de imagenes en ruta local dentro de la carpeta img.
+    const IMG_LOGO = "img/logo.png"; // Cambia aqui si tu logo tiene otro nombre
+    const IMG_S1 = "img/skinuno.gif";   // Mascota activa/saludando
+    const IMG_S2 = "img/skindos.gif";   // Mascota tranquila/parada
+
+    let currentUser = 'Amigo';
+    let activeTopic = null;
+
+    const TOPICS = {
+      sumas: {
+        label: 'Sumas',
+        intro: 'Vamos a practicar sumas. Si tienes dudas, pide una pista o pide otro ejercicio.',
+        hints: 'Recuerda juntar todas las unidades y luego las decenas.',
+        example: 'Que tal 8 + 7? Prueba sumarlas con calma.'
+      },
+      restas: {
+        label: 'Restas',
+        intro: 'Las restas son facil de dominar. Si necesitas ayuda, dime y te guio paso a paso.',
+        hints: 'Empieza restando las unidades y luego las decenas.',
+        example: 'Por ejemplo, 14 - 6 = ? Intenta pensar en familias de diez.'
+      },
+      multiplicacion: {
+        label: 'Multiplicacion',
+        intro: 'Multiplicar es como sumar grupos iguales. Practiquemos juntos.',
+        hints: 'Si sabes 3x4, puedes usarlo para calcular 6x4 tambien.',
+        example: '¿Cuanto es 7 x 5? Usa las tablas en tu cabeza.'
+      },
+      division: {
+        label: 'Division',
+        intro: 'Dividir reparte en partes iguales. Te enseño con ejemplos y trucos.',
+        hints: 'Divide en grupos y revisa cuantos caben en cada uno.',
+        example: 'Por ejemplo, 12 ÷ 3 = ? Piensa en 3 grupos de 4.'
+      },
+      fracciones: {
+        label: 'Fracciones',
+        intro: 'Las fracciones muestran partes de un todo. Vamos a jugar con ellas.',
+        hints: 'La mitad es 1/2 y un cuarto es 1/4. Busca partes iguales.',
+        example: 'Si tienes 4 porciones y comes 1, te quedan 3/4.'
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-src="logo"]').forEach(el => el.src = IMG_LOGO);
+      document.querySelectorAll('[data-src="s1"]').forEach(el => el.src = IMG_S1);
+      document.querySelectorAll('[data-src="s2"]').forEach(el => el.src = IMG_S2);
+
+      document.getElementById('loginButton').addEventListener('click', () => {
+        const name = document.getElementById('usernameInput').value.trim();
+        if (name) {
+          currentUser = name;
+          document.getElementById('welcomeName').textContent = currentUser;
+          document.getElementById('profilePill').textContent = currentUser;
+          showScreen('menu');
+        } else {
+          alert('Por favor escribe tu nombre para comenzar.');
+        }
+      });
+
+      document.getElementById('profilePill').addEventListener('click', goToLogros);
+      document.getElementById('chatInput').addEventListener('keydown', event => {
+        if (event.key === 'Enter') submitChat();
+      });
+    });
+
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.toggle('active', screen.id === `screen-${id}`);
+      });
+      if (id === 'menu') {
+        document.getElementById('welcomeName').textContent = currentUser;
+        document.getElementById('profilePill').textContent = currentUser;
+      }
+    }
+
+    function goToChat(topic) {
+      activeTopic = topic;
+      showScreen('chat');
+      const area = document.getElementById('messageArea');
+      area.innerHTML = '';
+      const intro = TOPICS[topic] ? TOPICS[topic].intro : 'Hablemos de matematicas.';
+      setTimeout(() => addMessage('bot', intro), 200);
+    }
+
+    function addMessage(sender, text) {
+      const area = document.getElementById('messageArea');
+      const message = document.createElement('div');
+      message.className = `message ${sender}`;
+      if (sender === 'bot') {
+        message.innerHTML = `
+          <div class="avatar"><img data-src="s1" alt="Profe" /></div>
+          <div class="bubble-message">${text}</div>`;
+      } else {
+        message.innerHTML = `<div class="bubble-message">${text}</div>`;
+      }
+      area.appendChild(message);
+      area.scrollTop = area.scrollHeight;
+      document.querySelectorAll('[data-src="s1"]').forEach(el => el.src = IMG_S1);
+    }
+
+    function submitChat() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text) return;
+      addMessage('user', text);
+      input.value = '';
+      setTimeout(() => addMessage('bot', getReply(text)), 600);
+    }
+
+    function sendQuick(text) {
+      document.getElementById('chatInput').value = text;
+      submitChat();
+    }
+
+    function getReply(text) {
+      const normalized = text.toLowerCase();
+      const current = TOPICS[activeTopic] || TOPICS.sumas;
+      if (/pista|ayuda|hint|duda/.test(normalized)) {
+        return `Claro, aqui va una pista: ${current.hints}`;
+      }
+      if (/otro|mas ejercicio|siguiente/.test(normalized)) {
+        return `Muy bien, otro reto: ${current.example}`;
+      }
+      if (/entiend|si|gracias|perfecto/.test(normalized)) {
+        return '¡Excelente! Sigue asi y veras como mejoras rapido.';
+      }
+      if (/\d+/.test(normalized)) {
+        if (/7\s*\+\s*5|8\s*\+\s*7|14\s*-\s*6|12\s*÷\s*3|7\s*x\s*5/.test(normalized)) {
+          return 'Muy bien, la respuesta parece muy cercana. Revisa cada paso y avanza con confianza.';
+        }
+        return 'Buena respuesta. Si quieres, puedo darte otro ejercicio o una explicacion.';
+      }
+      return `${current.intro} Si quieres, pide otra explicacion o un nuevo ejercicio.`;
+    }
+
+    function goToLogros() {
+      showScreen('logros');
+    }
+  </script>
+</body>
+</html>
